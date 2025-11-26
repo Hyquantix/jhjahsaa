@@ -1743,8 +1743,55 @@ AOS.init({
   offset: 120       // triggers earlier
 });
 </script>
+<script>
+  const toggleBtn = document.getElementById("servicesToggle");
+  const menu = document.getElementById("servicesMenu");
+  const arrow = document.getElementById("servicesArrow");
+
+  toggleBtn.onclick = () => {
+    const open = menu.classList.contains("opacity-100");
+    menu.classList.toggle("opacity-100", !open);
+    menu.classList.toggle("scale-100", !open);
+    menu.classList.toggle("pointer-events-auto", !open);
+    menu.classList.toggle("opacity-0", open);
+    menu.classList.toggle("scale-95", open);
+    menu.classList.toggle("pointer-events-none", open);
+    arrow.classList.toggle("rotate-180", !open);
+  };
+
+  document.addEventListener("click", (e) => {
+    if (!toggleBtn.contains(e.target) && !menu.contains(e.target)) {
+      menu.classList.add("opacity-0", "scale-95", "pointer-events-none");
+      menu.classList.remove("opacity-100", "scale-100", "pointer-events-auto");
+      arrow.classList.remove("rotate-180");
+    }
+  });
+</script>
+<script>
+// MAIN SERVICES ACCORDION
+const mToggle = document.getElementById("mobile-services-toggle");
+const mMenu = document.getElementById("mobile-services-menu");
+const mArrow = document.getElementById("mobile-services-arrow");
+
+mToggle.addEventListener("click", () => {
+  mMenu.classList.toggle("hidden");
+  mArrow.classList.toggle("rotate-90");
+});
+
+// SUBMENU ACCORDIONS
+document.querySelectorAll(".mobile-sub-btn").forEach((btn) => {
+  btn.addEventListener("click", () => {
+    const submenu = btn.nextElementSibling;
+    const arrow = btn.querySelector("svg");
+
+    submenu.classList.toggle("hidden");
+    arrow.classList.toggle("rotate-90");
+  });
+});
+</script>
 </body>
 </html>
+
 
 
 
